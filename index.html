@@ -7,10 +7,20 @@
 <body>
 
 <div class="container" ng-controller="InstagramSearchController">
-
-
+	<div class="logo"><img src="ng-instagram.png"></div>
+	<form name="instaform" novalidate ng-submit="">
+		<input ng-model="searchTerm" required />
+		<button ng-click="getInstagramResults()">Get Data</button>
+	</form>
+	<div ng-if="results || flash" class="message">We found {{results.length}} result{{results.length > 1 ? 's' : ''}}</div>
+	<div ng-if="results">
+		<div class="pictureDiv" ng-repeat="picture in results">
+			<h3><a target="_blank" href='http://instagram.com/{{picture.user.username}}'>{{picture.user.username}}</a></h3>
+			<a href='{{picture.link}}' target="_blank"><img ng-src='{{picture.images.low_resolution.url}}' /></a>
+		</div>
+	</div>
+	<div style="clear:both;"></div>
 </div>
-
 
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular.min.js"></script>
 <script src="app.js"></script>
